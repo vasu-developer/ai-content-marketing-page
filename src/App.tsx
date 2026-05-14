@@ -90,8 +90,7 @@ export default function App() {
               </a>
             ))}
             <div className="flex items-center gap-3 ml-4">
-              <a href="#" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Sign in</a>
-              <Button className="px-5 py-2">Get Started</Button>
+              <Button className="px-5 py-2" onClick={(e: any) => scrollToSection(e, '#contact')}>Get Started</Button>
             </div>
           </div>
 
@@ -109,7 +108,7 @@ export default function App() {
                 {link.name}
               </a>
             ))}
-            <Button className="mt-4 w-full">Get Started</Button>
+            <Button className="mt-4 w-full" onClick={(e: any) => scrollToSection(e, '#contact')}>Get Started</Button>
           </div>
         )}
       </nav>
@@ -131,7 +130,7 @@ export default function App() {
                 PulsePost deploys a team of AI agents that research, design, and publish your content across all channels—while you keep total control with 1-click WhatsApp approvals.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                <Button className="px-10 py-5 text-lg">Deploy Your Agent Free</Button>
+                <Button className="px-10 py-5 text-lg" onClick={(e: any) => scrollToSection(e, '#contact')}>Deploy Your Agent Free</Button>
                 <Button variant="secondary" className="px-10 py-5 text-lg" onClick={(e: any) => scrollToSection(e, '#workflow')}>See the Workflow</Button>
               </div>
             </div>
@@ -436,7 +435,7 @@ export default function App() {
                     <span className="text-5xl font-black text-white">{plan.price}</span>
                     <span className="text-sm font-medium text-gray-500 ml-2">/ {plan.period}</span>
                   </div>
-                  <Button className="w-full mb-10 py-4 font-black" variant={plan.featured ? 'primary' : 'secondary'}>Get Started</Button>
+                  <Button className="w-full mb-10 py-4 font-black" variant={plan.featured ? 'primary' : 'secondary'} onClick={(e: any) => scrollToSection(e, '#contact')}>Get Started</Button>
                   <ul className="space-y-4 text-xs text-gray-400">
                     {plan.features.map(f => (
                       <li key={f} className="flex gap-3 items-center">
@@ -478,6 +477,18 @@ export default function App() {
                 <div>
                   <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email</label>
                   <input type="email" className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors" placeholder="jane@example.com" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Support Category</label>
+                  <select className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors appearance-none cursor-pointer">
+                    <option value="" className="bg-gray-900">Select a category</option>
+                    <option value="enterprise" className="bg-gray-900">Enterprise Inquiry</option>
+                    <option value="partnership" className="bg-gray-900">Partnership Opportunity</option>
+                    <option value="training" className="bg-gray-900">Custom Agent Training</option>
+                    <option value="support" className="bg-gray-900">Technical Support</option>
+                    <option value="billing" className="bg-gray-900">Billing & Subscription</option>
+                    <option value="other" className="bg-gray-900">Other</option>
+                  </select>
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Message</label>
