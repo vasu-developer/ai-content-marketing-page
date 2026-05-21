@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const steps = [
   { 
@@ -162,8 +162,8 @@ const MobileConnector = ({ active }: { active: boolean }) => {
 export default function AgenticWorkflow() {
   const [activeStep, setActiveStep] = useState(0);
   const [isTransferring, setIsTransferring] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const cycleRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<any>(null);
+  const cycleRef = useRef<any>(null);
 
   const startAnimationLoop = () => {
     if (cycleRef.current) clearInterval(cycleRef.current);

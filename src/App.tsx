@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import aiPreviewStep3 from './assets/ai_content_preview_step3.png';
 import AgenticWorkflow from './components/AgenticWorkflow';
@@ -160,11 +160,6 @@ const testimonials = [
   },
 ];
 
-const plans = [
-  { name: 'Standard', price: '$0', period: 'forever', desc: 'Perfect for solo creators testing agentic loops.', features: ['1 Active Strategy Agent', '20 drafts per month', 'WhatsApp Approvals', 'Standard Prompt Library'], featured: false },
-  { name: 'Growth', price: '$99', period: 'mo', desc: 'For scaling teams and small agencies.', features: ['3 Active Strategy Agents', 'Unlimited drafts', 'Custom Brand Voices', 'Slack & WhatsApp loops', 'Priority Agent Queues'], featured: true },
-  { name: 'Scale', price: '$499', period: 'mo', desc: 'Full autonomous content operations for enterprise.', features: ['Unlimited Agents', 'API Access', 'White-labeled Portals', 'Dedicated Support', 'Custom Guardrail Training'], featured: false },
-];
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
