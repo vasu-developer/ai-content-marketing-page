@@ -941,7 +941,7 @@ export default function App() {
                 {/* Large Background Quote Watermark */}
                 <div className="absolute right-6 top-6 text-fuchsia-500/[0.04] group-hover:text-fuchsia-500/[0.08] group-hover:scale-110 transition-all duration-500 pointer-events-none">
                   <svg className="w-20 h-20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.748-9.762 9-10.109V5c-2.977.566-4.945 2.1-4.945 3.793 0 .116.037.268.037.407 0 1.21-.1 2.378H23v9.64H14.017zm-14 0v-7.391c0-5.704 3.748-9.762 9-10.109V5C6.04 5.566 4.072 7.1 4.072 8.793c0 .116.037.268.037.407 0 1.21-.1 2.378H9v9.64H.017z"/>
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                   </svg>
                 </div>
 
