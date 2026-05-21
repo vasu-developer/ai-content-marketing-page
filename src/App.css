@@ -133,3 +133,167 @@ textarea::placeholder {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes float-delayed {
+  0% { transform: translateY(-10px) rotate(-1deg); }
+  50% { transform: translateY(5px) rotate(1deg); }
+  100% { transform: translateY(-10px) rotate(-1deg); }
+}
+
+@keyframes neon-glow {
+  0% { opacity: 0.4; filter: blur(20px); }
+  50% { opacity: 0.8; filter: blur(35px); }
+  100% { opacity: 0.4; filter: blur(20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+}
+
+@keyframes laserSweep {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.active-workflow-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.active-workflow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    rgba(168, 85, 247, 0.2),
+    rgba(34, 211, 238, 0.85),
+    rgba(129, 140, 248, 0.9),
+    rgba(236, 72, 153, 0.72),
+    rgba(168, 85, 247, 0.2)
+  );
+  background-size: 260% 260%;
+  animation: feedbackBorderFlow 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.3));
+}
+
+.active-workflow-border::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(11, 15, 25, 0.96);
+}
+
+/* --- CUSTOM TEAM CARD GLOW ANIMATIONS --- */
+.team-founder-glow {
+  position: relative;
+  isolation: isolate;
+}
+.team-founder-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    rgba(217, 70, 239, 0.2),
+    rgba(217, 70, 239, 0.95),
+    rgba(99, 102, 241, 0.9),
+    rgba(168, 85, 247, 0.8),
+    rgba(217, 70, 239, 0.2)
+  );
+  background-size: 260% 260%;
+  animation: feedbackBorderFlow 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(217, 70, 239, 0.3));
+}
+.team-founder-glow::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(11, 15, 25, 0.96);
+}
+
+.team-developer-glow {
+  position: relative;
+  isolation: isolate;
+}
+.team-developer-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    rgba(168, 85, 247, 0.2),
+    rgba(168, 85, 247, 0.95),
+    rgba(59, 130, 246, 0.9),
+    rgba(129, 140, 248, 0.8),
+    rgba(168, 85, 247, 0.2)
+  );
+  background-size: 260% 260%;
+  animation: feedbackBorderFlow 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.3));
+}
+.team-developer-glow::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(11, 15, 25, 0.96);
+}
+
+.team-executor-glow {
+  position: relative;
+  isolation: isolate;
+}
+.team-executor-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    rgba(34, 211, 238, 0.2),
+    rgba(34, 211, 238, 0.95),
+    rgba(16, 185, 129, 0.9),
+    rgba(14, 116, 144, 0.8),
+    rgba(34, 211, 238, 0.2)
+  );
+  background-size: 260% 260%;
+  animation: feedbackBorderFlow 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.3));
+}
+.team-executor-glow::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(11, 15, 25, 0.96);
+}
+
+
