@@ -20,7 +20,7 @@ const Button = ({ children, variant = 'primary', className = '', ...props }: any
 };
 
 const Card = ({ children, className = '' }: any) => (
-  <div className={`rounded-2xl border border-white/10 bg-black/20 p-6 backdrop-blur-md ${className}`}>
+  <div className={`rounded-2xl border border-white/10 bg-black/20 p-6 py-5 backdrop-blur-md ${className}`}>
     {children}
   </div>
 );
@@ -165,6 +165,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'terms' | 'privacy'>('home');
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -264,13 +265,13 @@ export default function App() {
 
                 {/* Headline */}
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-[1.1]">
-                  Create. Automate.<br />
-                  Grow on <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Social Media.</span>
+                 From Prompt to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Social Media</span>
+                   {/* <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> Email </span> */}
                 </h1>
 
                 {/* Subheadline */}
                 <p className="text-gray-400 text-sm sm:text-base max-w-xl leading-relaxed">
-                  Upload your content or share your idea, and let AI create stunning posts tailored for every platform in seconds.
+                  Upload your content or share your idea, and let AI create stunning posts tailored for popular Social Media platforms.
                 </p>
 
                 {/* Quick Features Row */}
@@ -305,65 +306,87 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Right Column: Floating Visuals */}
-              <div className="relative h-[200px] sm:h-[300px] flex items-center justify-center">
-                {/* Glows */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/10 blur-[100px] animate-pulse"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-blue-500/15 blur-[90px] animate-pulse delay-700"></div>
+              {/* Right Column: Mobile-Optimized CTA or Desktop Floating Visuals */}
+              <div className="relative lg:h-[300px] flex items-center justify-center w-full">
+                {/* Mobile View: High-impact content creation button */}
+                <div className="lg:hidden w-full max-w-md mx-auto py-8 px-4 flex flex-col items-center">
+                  <button 
+                    onClick={(e: any) => scrollToSection(e, '#contact')}
+                    className="w-full py-4 px-8 rounded-2xl font-black text-base uppercase tracking-wider text-white transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-[0_0_40px_rgba(217,70,239,0.3)] relative overflow-hidden group border border-fuchsia-500/30 cursor-pointer"
+                  >
+                    {/* Glowing button background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 group-hover:opacity-90 transition-opacity"></div>
+                    {/* Animated sweep overlay */}
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[btnSweep_1.5s_ease-in-out_infinite]"></div>
+                    <span className="relative z-10 flex items-center justify-center gap-3">
+                      <svg className="w-5.5 h-5.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                      </svg>
+                      Create Content
+                    </span>
+                  </button>
+                  <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-4 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    Instant Generation Active
+                  </p>
+                </div>
 
-                {/* Main Composition */}
-                <div className="relative z-10 w-full h-full flex items-center justify-center">
-                  
-                  {/* Central Floating Instagram Card (Simple & Elegant) */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 sm:w-44 aspect-[4/5] glass-panel rounded-2xl overflow-hidden animate-float rotate-6 border border-white/20 shadow-2xl z-20">
-                    <img src="https://images.unsplash.com/photo-1611262588024-d12430b98920?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="IG Post" />
-                  </div>
+                {/* Desktop View: Ambient orbiting visuals */}
+                <div className="hidden lg:block absolute inset-0">
+                  {/* Glows */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/10 blur-[100px] animate-pulse"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-blue-500/15 blur-[90px] animate-pulse delay-700"></div>
 
-                  {/* Floating AI Badge */}
-                  <div className="absolute bottom-1 sm:bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 glass-panel rounded-xl font-bold text-xs text-blue-300 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.3)] animate-float-delayed z-30">
-                    AI Powered
-                  </div>
+                  <div className="relative z-10 w-full h-full flex items-center justify-center">
+                    {/* Central Floating Instagram Card */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 aspect-[4/5] glass-panel rounded-2xl overflow-hidden animate-float rotate-6 border border-white/20 shadow-2xl z-20">
+                      <img src="https://images.unsplash.com/photo-1611262588024-d12430b98920?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="IG Post" />
+                    </div>
 
-                  {/* Orbiting Icons (Tight Spacing / Reduced Margins) */}
-                  
-                  {/* Facebook (Left Side - Top) */}
-                  <div className="absolute hidden sm:flex top-8 left-4 sm:top-14 sm:left-14 w-15 h-15 sm:w-18 sm:h-18 rounded-2xl glass-panel flex items-center justify-center animate-float rotate-12 border border-[#1877F2]/30 shadow-[0_0_15px_rgba(24,119,242,0.2)] hover:scale-110 transition-transform">
-                    <svg className="w-7.5 h-7.5 sm:w-9 sm:h-9 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                    {/* Floating AI Badge */}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-4 py-1.5 glass-panel rounded-xl font-bold text-xs text-blue-300 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.3)] animate-float-delayed z-30">
+                      AI Powered
+                    </div>
+
+                    {/* Orbiting Icons */}
+                    {/* Facebook */}
+                    <div className="absolute top-14 left-14 w-18 h-18 rounded-2xl glass-panel flex items-center justify-center animate-float rotate-12 border border-[#1877F2]/30 shadow-[0_0_15px_rgba(24,119,242,0.2)] hover:scale-110 transition-transform">
+                      <svg className="w-9 h-9 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                      </svg>
+                    </div>
+
+                    {/* YouTube */}
+                    <div className="absolute bottom-16 left-16 w-16 h-16 rounded-2xl glass-panel flex items-center justify-center animate-float-delayed -rotate-12 border border-[#FF0000]/30 shadow-[0_0_15px_rgba(255,0,0,0.2)] hover:scale-110 transition-transform">
+                      <svg className="w-8 h-8 text-[#FF0000]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.507 9.387.507 9.387.507s7.517 0 9.387-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                      </svg>
+                    </div>
+
+                    {/* WhatsApp */}
+                    <div className="absolute top-14 right-14 w-18 h-18 rounded-2xl glass-panel flex items-center justify-center animate-float rotate-6 border border-[#25D366]/30 shadow-[0_0_15px_rgba(37,211,102,0.2)] hover:scale-110 transition-transform">
+                      <svg className="w-9 h-9 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
                   </div>
 
-                  {/* YouTube (Left Side - Bottom) */}
-                  <div className="absolute hidden sm:flex bottom-10 left-6 sm:bottom-16 sm:left-16 w-13 h-13 sm:w-16 sm:h-16 rounded-2xl glass-panel flex items-center justify-center animate-float-delayed -rotate-12 border border-[#FF0000]/30 shadow-[0_0_15px_rgba(255,0,0,0.2)] hover:scale-110 transition-transform">
-                    <svg className="w-6.5 h-6.5 sm:w-8 sm:h-8 text-[#FF0000]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.507 9.387.507 9.387.507s7.517 0 9.387-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
-                  </div>
-
-                  {/* WhatsApp (Right Side - Top) */}
-                  <div className="absolute hidden sm:flex top-8 right-4 sm:top-14 sm:right-14 w-15 h-15 sm:w-18 sm:h-18 rounded-2xl glass-panel flex items-center justify-center animate-float rotate-6 border border-[#25D366]/30 shadow-[0_0_15px_rgba(37,211,102,0.2)] hover:scale-110 transition-transform">
-                    <svg className="w-7.5 h-7.5 sm:w-9 sm:h-9 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                  </div>
-
-                  {/* TikTok (Right Side - Middle) */}
-                  <div className="absolute hidden sm:flex top-1/2 -translate-y-1/2 right-2 sm:right-12 w-11 h-11 sm:w-14 sm:h-14 rounded-2xl glass-panel flex items-center justify-center animate-float-delayed -rotate-12 border border-cyan-400/30 shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:scale-110 transition-transform">
-                    <svg className="w-5.5 h-5.5 sm:w-7 sm:h-7 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                  {/* TikTok */}
+                  <div className="absolute top-1/2 -translate-y-1/2 right-12 w-14 h-14 rounded-2xl glass-panel flex items-center justify-center animate-float-delayed -rotate-12 border border-cyan-400/30 shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:scale-110 transition-transform">
+                    <svg className="w-7 h-7 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52V6.69z"/>
                     </svg>
                   </div>
 
-                  {/* LinkedIn (Right Side - Bottom) */}
-                  <div className="absolute hidden sm:flex bottom-10 right-6 sm:bottom-16 sm:right-16 w-13 h-13 sm:w-16 sm:h-16 rounded-2xl glass-panel flex items-center justify-center animate-float rotate-12 border border-[#0077B5]/30 shadow-[0_0_15px_rgba(0,119,181,0.2)] hover:scale-110 transition-transform">
-                    <svg className="w-6.5 h-6.5 sm:w-8 sm:h-8 text-[#0077B5]" fill="currentColor" viewBox="0 0 24 24">
+                  {/* LinkedIn */}
+                  <div className="absolute bottom-16 right-16 w-16 h-16 rounded-2xl glass-panel flex items-center justify-center animate-float rotate-12 border border-[#0077B5]/30 shadow-[0_0_15px_rgba(0,119,181,0.2)] hover:scale-110 transition-transform">
+                    <svg className="w-8 h-8 text-[#0077B5]" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
                   </div>
-
                 </div>
               </div>
             </div>
+          </div>
 
             {/* WORKFLOW PREVIEW SECTION */}
             <div className="relative mb-6">
@@ -603,7 +626,7 @@ export default function App() {
           <div className="text-center mb-16">
             <h2 className="text-sm font-black uppercase tracking-[0.3em] text-fuchsia-400 mb-4">The Engine</h2>
             <h3 className="text-4xl md:text-6xl font-black text-white leading-tight">Human-in-the-loop Automation.</h3>
-            <p className="mt-6 text-gray-400 text-xl max-w-2xl mx-auto">PulsePost doesn't just generate; it orchestrates a full content lifecycle with autonomous precision.</p>
+            {/* <p className="mt-6 text-gray-400 text-xl max-w-2xl mx-auto">PulsePost doesn't just generate; it orchestrates a full content lifecycle with autonomous precision.</p> */}
           </div>
           
           <AgenticWorkflow />
@@ -742,23 +765,23 @@ export default function App() {
          </section>
         
         {/* === USE CASES === */}
-        <section id="use-cases" className="mx-auto w-full max-w-none px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32 py-24 border-t border-white/5">
+        <section id="use-cases" className="mx-auto w-full max-w-none px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32 py-12 sm:py-16 md:py-24 border-t border-white/5">
           <div className="text-center mb-16">
             <h2 className="text-sm font-black uppercase tracking-[0.3em] text-fuchsia-400 mb-4">Use Cases</h2>
             <h3 className="text-3xl md:text-5xl font-black text-white leading-tight">Built for high-velocity teams.</h3>
-            <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">PulsePost is the secret weapon for organizations that need to dominate the attention economy on autopilot.</p>
+            <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">Built for fast-moving brands, creators, and teams that need to create, approve, and publish content at scale.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
             {/* Creators Card */}
             <Card className="hover:border-fuchsia-500/30 hover:shadow-[0_0_30px_rgba(217,70,239,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-fuchsia-500/10 bg-fuchsia-500/[0.02]">
-              <div className="w-12 h-12 rounded-2xl bg-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center mb-6 shadow-lg shadow-fuchsia-500/10">
+              {/* <div className="w-12 h-12 rounded-2xl bg-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center mb-6 shadow-lg shadow-fuchsia-500/10">
                 <svg className="w-6 h-6 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 0M8 21c-2-2-2-5 0-7l8-8 3 3-7 8c-2 2-5 2-7 0zm11-13l-3-3m0 0l-1.5-1.5M16 2.5L14.5 1" />
                 </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Creators</h3>
-              <ul className="space-y-3">
+              </div> */}
+              <h3 className="text-xl font-bold text-white mb-4">Marketing Agencies</h3>
+              {/* <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-fuchsia-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>AI Generation:</strong><span className="hidden sm:inline"> Auto-create text, images, and videos.</span></span>
@@ -771,18 +794,18 @@ export default function App() {
                   <span className="text-fuchsia-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>One-Word Posting:</strong><span className="hidden sm:inline"> Reply "Approve" to publish instantly.</span></span>
                 </li>
-              </ul>
+              </ul> */}
             </Card>
 
             {/* Brands Card */}
             <Card className="hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-cyan-500/10 bg-cyan-500/[0.02]">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/10">
+              {/* <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/10">
                 <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Brands</h3>
-              <ul className="space-y-3">
+              </div> */}
+              <h3 className="text-xl font-bold text-white mb-4">E-commerce Brands</h3>
+              {/* <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-cyan-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>Consistent Voice:</strong><span className="hidden sm:inline"> Automate customized daily posts.</span></span>
@@ -795,18 +818,18 @@ export default function App() {
                   <span className="text-cyan-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>Tap to Approve:</strong><span className="hidden sm:inline"> Review and post from phone chats.</span></span>
                 </li>
-              </ul>
+              </ul> */}
             </Card>
 
             {/* Agencies Card */}
             <Card className="hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-purple-500/10 bg-purple-500/[0.02]">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/10">
+              {/* <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/10">
                 <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
                 </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Agencies</h3>
-              <ul className="space-y-3">
+              </div> */}
+              <h3 className="text-xl font-bold text-white mb-4">Content Teams</h3>
+              {/* <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-purple-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>Bulk Production:</strong><span className="hidden sm:inline"> Mass-produce copy and visuals.</span></span>
@@ -819,18 +842,18 @@ export default function App() {
                   <span className="text-purple-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>Reply to Schedule:</strong><span className="hidden sm:inline"> Clients text "Approve" to post.</span></span>
                 </li>
-              </ul>
+              </ul> */}
             </Card>
 
             {/* Teams Card */}
             <Card className="hover:border-indigo-500/30 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-indigo-500/10 bg-indigo-500/[0.02]">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/10">
+              {/* <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/10">
                 <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Teams</h3>
-              <ul className="space-y-3">
+              </div> */}
+              <h3 className="text-xl font-bold text-white mb-4">Personal Brands</h3>
+              {/* <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-indigo-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>Brand Safe Assets:</strong><span className="hidden sm:inline"> Co-create verified corporate copy.</span></span>
@@ -843,7 +866,19 @@ export default function App() {
                   <span className="text-indigo-400 font-bold mt-1 text-[10px]">✦</span>
                   <span className="text-gray-300 text-xs leading-normal"><strong>Secure Publishing:</strong><span className="hidden sm:inline"> Post multi-channel with quick replies.</span></span>
                 </li>
-              </ul>
+              </ul> */}
+            </Card>
+             <Card className="hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-cyan-500/10 bg-cyan-500/[0.02]">
+             <h3 className="text-xl font-bold text-white mb-4">Startups</h3>
+            </Card>
+             <Card className="hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-cyan-500/10 bg-cyan-500/[0.02]">
+             <h3 className="text-xl font-bold text-white mb-4">Coaches & Consultants</h3>
+            </Card>
+             <Card className="hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-cyan-500/10 bg-cyan-500/[0.02]">
+             <h3 className="text-xl font-bold text-white mb-4">Independent Creators</h3>
+            </Card>
+             <Card className="hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-300 hover:-translate-y-1.5 border-cyan-500/10 bg-cyan-500/[0.02]">
+             <h3 className="text-xl font-bold text-white mb-4">Solo Entrepreneurs</h3>
             </Card>
           </div>
         </section>
@@ -979,114 +1014,227 @@ export default function App() {
             <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">Got questions about automated loops, security, or customization? We have answers.</p>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-4">
-            {[
-              {
-                q: "How do autonomous agents research social media trends?",
-                a: "Our Strategy Agent runs deep trend ingestion queries across LinkedIn, TikTok, and Instagram metadata hourly. It identifies viral hooks, rising topics, and structural patterns, then drafts matching content vectors for your brand style guide."
-              },
-              {
-                q: "Is it safe to link and schedule posts via WhatsApp?",
-                a: "Yes, absolutely. PulsePost uses authorized developer API channels for post execution. The WhatsApp integration is simply your human-in-the-loop control dashboard where you receive notification drafts and reply with a single word to confirm publication."
-              },
-              {
-                q: "Can I train the model on my brand voice?",
-                a: "Yes. You can upload existing style guides, past newsletters, blogs, and marketing assets. The agents analyze these elements in a secure, isolated database environment to perfectly replicate your conversational style and vocabulary."
-              },
-              {
-                q: "What platforms are currently supported?",
-                a: "We support direct native auto-publishing to Instagram (Reels & Feed), LinkedIn, TikTok, YouTube (Shorts & Videos), Facebook (Reels & Posts), and WhatsApp Status broadcast channels."
-              }
-            ].map((faq, index) => {
-              const isOpen = expandedFaq === index;
+          <div className="max-w-3xl mx-auto">
+            {(() => {
+              const faqs = [
+                {
+                  q: "How does the platform work?",
+                  a: "Simply send a prompt through WhatsApp or Email, and our autonomous AI will generate, edit, optimize, approve, and publish your content automatically across connected social media platforms."
+                },
+                {
+                  q: "Can I upload my existing videos or images?",
+                  a: "Yes. You can upload your raw media directly to your agent, and the AI will edit, optimize, add styled captions, format the layout, and prepare the content for multi-channel publishing."
+                },
+                {
+                  q: "Which social media platforms do you support?",
+                  a: "Our platform supports native direct publishing to Instagram, Facebook, LinkedIn, TikTok, and YouTube Shorts. Custom integrations can also be engineered based on specific enterprise requirements."
+                },
+                {
+                  q: "Do I need video editing skills to use the platform?",
+                  a: "No, absolutely not. The platform is designed for anyone to create and publish content easily. Our autonomous agents handle all editing, transcription, layout styling, and optimization under the hood."
+                },
+                {
+                  q: "Can I approve content before it gets published?",
+                  a: "Yes. You maintain 100% human-in-the-loop control. You will receive draft previews through WhatsApp or Email and can approve, edit, or request changes before anything goes live."
+                },
+                {
+                  q: "Can I manage everything from my phone?",
+                  a: "Absolutely. The platform is fully mobile-first. Your entire campaign management—from prompt suggestions to reviews, scheduling, and approvals—happens seamlessly through WhatsApp and Email workflows."
+                },
+                {
+                  q: "Is this suitable for agencies and businesses?",
+                  a: "Yes. The platform is highly optimized for marketing agencies, e-commerce brands, startup teams, coaches, and creators who need to scale their social output without adding massive operational overhead."
+                },
+                {
+                  q: "Can the platform generate content automatically from simple text prompts?",
+                  a: "Yes. You can draft content on-the-go by messaging a simple idea. The AI instantly drafts high-converting captions, optimizes hashtags, generates graphics or slides, and layouts the post."
+                },
+                {
+                  q: "Can I schedule posts automatically?",
+                  a: "Yes. Once you reply 'Approve' to a WhatsApp draft, your posts are automatically scheduled and distributed across all connected channels according to your custom brand publication calendar."
+                }
+              ];
+              const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 5);
               return (
-                <div 
-                  key={index}
-                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isOpen 
-                      ? 'border-fuchsia-500/30 bg-fuchsia-500/[0.03] shadow-[0_0_20px_rgba(217,70,239,0.05)]' 
-                      : 'border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.04]'
-                  }`}
-                >
-                  <button
-                    onClick={() => setExpandedFaq(isOpen ? null : index)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none cursor-pointer"
-                  >
-                    <span className="font-bold text-white text-base sm:text-lg pr-4">{faq.q}</span>
-                    <span className={`w-6 h-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-fuchsia-400 border-fuchsia-500/20 bg-fuchsia-500/10' : ''}`}>
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </span>
-                  </button>
-                  <div 
-                    className={`transition-all duration-300 ease-in-out ${
-                      isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
-                    }`}
-                  >
-                    <div className="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-white/[0.03] pt-4">
-                      {faq.a}
-                    </div>
+                <>
+                  <div className="space-y-4">
+                    {visibleFaqs.map((faq, index) => {
+                      const isOpen = expandedFaq === index;
+                      return (
+                        <div 
+                          key={index}
+                          className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                            isOpen 
+                              ? 'border-fuchsia-500/30 bg-fuchsia-500/[0.03] shadow-[0_0_20px_rgba(217,70,239,0.05)]' 
+                              : 'border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.04]'
+                          }`}
+                        >
+                          <button
+                            onClick={() => setExpandedFaq(isOpen ? null : index)}
+                            className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none cursor-pointer"
+                          >
+                            <span className="font-bold text-white text-base sm:text-lg pr-4">{faq.q}</span>
+                            <span className={`w-6 h-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-fuchsia-400 border-fuchsia-500/20 bg-fuchsia-500/10' : ''}`}>
+                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </span>
+                          </button>
+                          <div 
+                            className={`transition-all duration-300 ease-in-out ${
+                              isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+                            }`}
+                          >
+                            <div className="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-white/[0.03] pt-4">
+                              {faq.a}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                </div>
+                  {faqs.length > 5 && (
+                    <div className="text-center mt-10">
+                      <button
+                        onClick={() => {
+                          setShowAllFaqs(!showAllFaqs);
+                          setExpandedFaq(null);
+                        }}
+                        className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl border border-white/10 bg-white/[0.03] text-gray-300 hover:text-white hover:bg-white/[0.08] hover:border-fuchsia-500/30 transition-all duration-300 font-bold text-sm cursor-pointer shadow-lg hover:shadow-fuchsia-500/5 group"
+                      >
+                        <span>{showAllFaqs ? "Show Less Questions" : "Show All FAQs"}</span>
+                        <svg className={`w-4 h-4 transition-transform duration-300 ${showAllFaqs ? 'rotate-180 text-fuchsia-400' : 'text-gray-400 group-hover:translate-y-0.5'}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </>
               );
-            })}
+            })()}
           </div>
         </section>
 
         {/* === CONTACT US === */}
-        <section id="contact" className="mx-auto w-full max-w-none px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32 py-24 border-t border-white/5 bg-gray-950">
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">Let's elevate your content game.</h2>
-              <p className="mt-4 text-gray-400 text-lg mb-8">Have questions about enterprise plans, integrations, or just want to say hi? Drop us a message.</p>
-              <div className="space-y-4 text-gray-300">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"><svg className="w-5 h-5 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></div>
-                  <span>hello@pulsepost.ai</span>
+        <section id="contact" className="mx-auto w-full max-w-none px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32 py-24 border-t border-white/5 bg-gradient-to-b from-gray-950 via-[#0a0514] to-gray-950 relative overflow-hidden">
+          {/* Subtle Background Glows specific to this section */}
+          <div className="pointer-events-none absolute inset-0 z-0 opacity-70">
+            <div className="absolute -top-40 left-0 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-[120px]" />
+            <div className="absolute -bottom-40 right-0 h-[500px] w-[500px] rounded-full bg-fuchsia-500/10 blur-[120px]" />
+            <div className="absolute top-1/2 left-1/3 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-purple-500/8 blur-[100px]" />
+          </div>
+
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-stretch relative z-10">
+            <div className="flex flex-col justify-between h-full py-4 text-left space-y-10 lg:space-y-12">
+              <div className="space-y-6">
+                {/* Category badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/25 text-fuchsia-300 text-[11px] font-bold uppercase tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-pulse"></span>
+                  Get Started
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"><svg className="w-5 h-5 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg></div>
-                  <span>+1 (555) 123-4567</span>
+
+                <h3 className="text-3xl md:text-5xl font-black text-white leading-tight">
+                  Let's elevate your <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400">content game.</span>
+                </h3>
+                
+                <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-md">
+                  Deploy your autonomous agent network today. Align your brand voice, automate campaign research, and schedule posts natively in seconds.
+                </p>
+
+                {/* Bullet Points */}
+                <div className="space-y-5 pt-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-lg bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center shrink-0 mt-1">
+                      <svg className="w-3.5 h-3.5 text-fuchsia-400" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">100% Brand Safe Approval Loop</h4>
+                      <p className="text-gray-500 text-xs mt-0.5">Every content draft is sent directly to your phone. Approve or refine with 1 tap on WhatsApp.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center shrink-0 mt-1">
+                      <svg className="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">Autonomous Multi-Agent Systems</h4>
+                      <p className="text-gray-500 text-xs mt-0.5">Independent agents run market trend research, draft optimized hooks, and design visual prompts in sync.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
+                      <svg className="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">Omnichannel Native Distribution</h4>
+                      <p className="text-gray-500 text-xs mt-0.5">Push directly to LinkedIn, Instagram, TikTok, YouTube Shorts, Facebook, and WhatsApp Status channels.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap gap-4 pt-6 border-t border-white/5 w-full">
+                <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-white/5 bg-white/[0.02]">
+                  <svg className="w-4 h-4 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span className="text-xs font-semibold text-gray-300">hello@pulsepost.ai</span>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-white/5 bg-white/[0.02]">
+                  <svg className="w-4 h-4 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span className="text-xs font-semibold text-gray-300">+1 (555) 123-4567</span>
                 </div>
               </div>
             </div>
             
-            <Card className="p-8 border-fuchsia-500/20 bg-black/40">
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Name *</label>
-                    <input required type="text" className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors" placeholder="Marcus Thorne" />
+            {/* Themed Form wrapper with custom inputs */}
+            <div className="contact-form-glow rounded-3xl p-[1px] shadow-2xl h-full">
+              <div className="bg-transparent rounded-[23px] p-8 sm:p-10 h-full relative z-10">
+                <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Name *</label>
+                      <input required type="text" className="w-full bg-[#0e091f]/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-fuchsia-500 focus:bg-[#0e091f]/80 hover:border-white/20 focus:ring-2 focus:ring-fuchsia-500/20 transition-all placeholder-gray-500 text-sm duration-300" placeholder="Marcus Thorne" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email *</label>
+                      <input required type="email" className="w-full bg-[#0e091f]/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-fuchsia-500 focus:bg-[#0e091f]/80 hover:border-white/20 focus:ring-2 focus:ring-fuchsia-500/20 transition-all placeholder-gray-500 text-sm duration-300" placeholder="marcus@pulsepost.ai" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Phone *</label>
+                      <input required type="tel" className="w-full bg-[#0e091f]/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-fuchsia-500 focus:bg-[#0e091f]/80 hover:border-white/20 focus:ring-2 focus:ring-fuchsia-500/20 transition-all placeholder-gray-500 text-sm duration-300" placeholder="+1 (555) 012-3456" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Occupation <span className="text-gray-500 font-normal lowercase">(optional)</span></label>
+                      <input type="text" className="w-full bg-[#0e091f]/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-fuchsia-500 focus:bg-[#0e091f]/80 hover:border-white/20 focus:ring-2 focus:ring-fuchsia-500/20 transition-all placeholder-gray-500 text-sm duration-300" placeholder="Growth Lead" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Business Name <span className="text-gray-500 font-normal lowercase">(optional)</span></label>
+                      <input type="text" className="w-full bg-[#0e091f]/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-fuchsia-500 focus:bg-[#0e091f]/80 hover:border-white/20 focus:ring-2 focus:ring-fuchsia-500/20 transition-all placeholder-gray-500 text-sm duration-300" placeholder="Nexus Media" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Web URL <span className="text-gray-500 font-normal lowercase">(optional)</span></label>
+                      <input type="url" className="w-full bg-[#0e091f]/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-fuchsia-500 focus:bg-[#0e091f]/80 hover:border-white/20 focus:ring-2 focus:ring-fuchsia-500/20 transition-all placeholder-gray-500 text-sm duration-300" placeholder="https://nexusmedia.com" />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Message *</label>
+                      <textarea required rows={4} className="w-full bg-[#0e091f]/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-fuchsia-500 focus:bg-[#0e091f]/80 hover:border-white/20 focus:ring-2 focus:ring-fuchsia-500/20 transition-all placeholder-gray-500 text-sm resize-none duration-300" placeholder="Tell us about your brand and what you want to automate..."></textarea>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email *</label>
-                    <input required type="email" className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors" placeholder="marcus@pulsepost.ai" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Phone *</label>
-                    <input required type="tel" className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors" placeholder="+1 (555) 012-3456" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Occupation <span className="text-gray-500 font-normal lowercase">(optional)</span></label>
-                    <input type="text" className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors" placeholder="Growth Lead" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Business Name <span className="text-gray-500 font-normal lowercase">(optional)</span></label>
-                    <input type="text" className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors" placeholder="Nexus Media" />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Web URL <span className="text-gray-500 font-normal lowercase">(optional)</span></label>
-                    <input type="url" className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors" placeholder="https://nexusmedia.com" />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Message *</label>
-                    <textarea required rows={4} className="w-full bg-gray-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-fuchsia-500 transition-colors resize-none" placeholder="Tell us about your brand and what you want to automate..."></textarea>
-                  </div>
-                </div>
-                <Button className="w-full py-3.5 mt-2">Send Inquiry</Button>
-              </form>
-            </Card>
+                  <Button className="w-full py-3.5 mt-2 transition-all cursor-pointer">Send Inquiry</Button>
+                </form>
+              </div>
+            </div>
           </div>
         </section>
           </>
@@ -1110,7 +1258,7 @@ export default function App() {
             </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-6">Product</p>
-              <ul className="space-y-4">
+              <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
                 {navLinks.map(link => (
                    <li key={link.name}><a href={link.href} onClick={(e) => scrollToSection(e, link.href)} className="text-sm text-gray-400 hover:text-fuchsia-300 transition-colors">{link.name}</a></li>
                 ))}

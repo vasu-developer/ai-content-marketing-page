@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 const steps = [
   { 
     step: '01', 
-    title: 'Strategy Agent', 
-    desc: 'Analyzes your brand voice, industry trends, and target audience to build a content plan.', 
+    title: 'Generate Content/Upload Media', 
+    desc: 'Generate videos, captions,  images, and social media posts or upload existing media and let AI optimize it automatically.', 
     icon: (
       <svg className="w-6 h-6 text-fuchsia-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -15,8 +15,8 @@ const steps = [
   },
   { 
     step: '02', 
-    title: 'Creative Agent', 
-    desc: 'Generates platform-specific copy, hooks, and visual prompts optimized for engagement.', 
+    title: 'Edit with AI', 
+    desc: 'AI trims, edits, adds captions, voiceovers, and platform optimization instantly', 
     icon: (
       <svg className="w-6 h-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
@@ -27,8 +27,8 @@ const steps = [
   },
   { 
     step: '03', 
-    title: 'Approval Loop', 
-    desc: 'Sends drafts to your WhatsApp. One tap to approve, refine, or schedule instantly.', 
+    title: 'Approve Anywhere', 
+    desc: 'Automatically publish content across all major social media platforms.', 
     icon: (
       <svg className="w-6 h-6 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -38,7 +38,7 @@ const steps = [
   },
   { 
     step: '04', 
-    title: 'Publishing Agent', 
+    title: 'Auto Publish', 
     desc: 'Handles multi-platform distribution and monitors performance for the next cycle.', 
     icon: (
       <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
